@@ -1,7 +1,7 @@
 {
-  "name": "hardhat-solidity",
-  "publisher": "NomicFoundation",
-  "displayName": "Solidity",
+  "name": "calibur-hardhat-solidity",
+  "publisher": "0xCalibur",
+  "displayName": "0xCalibur-Solidity",
   "description": "Solidity and Hardhat support by the Hardhat team",
   "license": "MIT",
   "version": "0.8.5",

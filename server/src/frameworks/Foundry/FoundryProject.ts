@@ -23,6 +23,7 @@ import { resolveForgeCommand } from "./resolveForgeCommand";
 export class FoundryProject extends Project {
   public priority = 2;
   public sourcesPath!: string;
+  public includesPath!: string;
   public testsPath!: string;
   public libPath!: string;
   public scriptPath!: string;
@@ -55,6 +56,7 @@ export class FoundryProject extends Project {
         await runCmd(`${forgeCommand} config --json`, this.basePath)
       );
       this.sourcesPath = path.join(this.basePath, config.src);
+      this.includesPath = path.join(this.basePath, config.include_paths);
       this.testsPath = path.join(this.basePath, config.test);
       this.libPath = path.join(this.basePath, "lib");
       this.scriptPath = path.join(this.basePath, config.script);
@@ -88,6 +90,7 @@ export class FoundryProject extends Project {
       // Project was initialized correctly, then check contract is inside source or test folders
       const belongs = [
         this.sourcesPath,
+        this.includesPath,
         this.testsPath,
         this.libPath,
         this.scriptPath,
