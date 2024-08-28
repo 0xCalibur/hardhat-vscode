@@ -56,7 +56,7 @@ export class FoundryProject extends Project {
         await runCmd(`${forgeCommand} config --json`, this.basePath)
       );
       this.sourcesPath = path.join(this.basePath, config.src);
-      this.includesPath = path.join(this.basePath, config.include_paths);
+      this.includesPath = config.include_paths.map((folder: string) => path.join(this.basePath, folder));
       this.testsPath = path.join(this.basePath, config.test);
       this.libPath = path.join(this.basePath, "lib");
       this.scriptPath = path.join(this.basePath, config.script);
@@ -90,10 +90,10 @@ export class FoundryProject extends Project {
       // Project was initialized correctly, then check contract is inside source or test folders
       const belongs = [
         this.sourcesPath,
-        this.includesPath,
         this.testsPath,
         this.libPath,
         this.scriptPath,
+        ...this.includesPath,
       ].some((dir) => directoryContains(dir, uri));
       const isLocal = directoryContains(this.sourcesPath, uri);
 
